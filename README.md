@@ -7,13 +7,23 @@
 
 CONTENT
 
-- Github
 - Git
+- Github
 - SSH
 - Python
 - Virtual Environments
 - Package management (pip and pypi)
 - PyCharm
+
+
+
+
+### Git
+
+1. install git (if not already installed)
+2. configure git (username, .gitconfig etc)
+3. ...
+
 
 ### Github
  
@@ -22,20 +32,52 @@ CONTENT
   * on https://github.com/ehhalbers/python-dev-env, click [fork]
   * name your fork something senible and confirm
 
-
-### Git
-
-1. install git (if not already installed)
-2. configure git (username, .gitconfig etc)
-3. 
-
 ### SSH
  
-Connect your repo with git on your laptop via ssh
-1. Creating a ssh token on your laptop locally, following the instructions on github
+Connect your repo with git on your laptop via ssh:
+1. Creating a ssh-key pair locally on the laptop
+  * `ssh-keygen -t ed25519 -C "your_email@example.com"` where `-t` stands for the algorithm and `-C` for #todo...
+  * Store the file in the default folder
+  * `~/.ssh/id_ed25519`
+  * Passphrase can be used, but is often left blank (just press [ENTER])
+  * Now the fingerprint of the key is visible and the id_key and id_key.pub are stored on the .ssh folder.
+
+2. Starting the ssh-agent (-> client / server)
+  * `$ eval "$(ssh-agent -s)"`
+  * expected output: `> Agent pid 59566`
+
+3. Check if you have a config-file in the .ssh folder
+  * `$ open ~/.ssh/config`
+  * output: `> The file /Users/you/.ssh/config does not exist.`
+
+
+3b. Create config file (if not present yet, else add the key):
+    * `vim ~/.ssh/config`  # note we use again vim here!
+    * `i` to go into insert mode and type:
+    * ```
+      Host github.com
+           AddKeysToAgent yes
+           UseKeychain yes
+           IdentityFile ~/.ssh/id_ed25519
+           ```
+    * When finished press `[ESC]` (basic mode),`:wq` (write, quit) and `[ENTER]`.
+    
+
+4. Adding the ssh key to the configuration-file
+  * `ssh-add -K ~/.ssh/id_ed25519`
+
+5. Adding the ssh key to your github account
+  * Follow the instructions on the github manual: [Add a SSH key to Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+
+6.  Test if your ssh connection was established correctly
+  * `ssh -T git@github.com` # if it returns your username as configured in your github account, the connection is succesfull and you can continue with cloning or pushing the repo.
+
+All these steps come from: the instructions on github
   * SSH: [generating a new key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-2. Test if your ssh connection was established correctly
-  * `ssh -T git@github.com` # if it returns your username as configured in step X, the connection is succesfull and you can continue with cloning the repo
+
+### Back to Git
+
+
 
 Clone the repo
 1. Clone the repo locally
