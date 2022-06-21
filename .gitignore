@@ -2,6 +2,6 @@
 **/.idea
 venv_*
 db.*
-*/secrets.py
+**/secrets.py
 **/__pycache__/*
 
