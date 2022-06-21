@@ -27,32 +27,46 @@ print(x)
 '''
 Numeric
 '''
-print('Integer: ')
+
+'''
+Integer
+'''
+
 x=5
 print(type(x))
 print(x)
-print('--------------')
-print('Float: ')
+
+'''
+Float
+'''
+
 y=5.2
 print(type(y))
-print('--------------')
-print('Sequence')
+
+'''
+Sequence
+'''
+
 list_1=[1,2,3]
 tuple_1=(1,2,3)
 range_1=range(4)
 print(type(tuple_1))
 print(tuple_1)
-print('--------------')
-print('Mapping')
+
+'''
+Mapping
+'''
+
 dict_1={'Netherlands':'Amsterdam','USA':'Washington','Japan':'Tokyo'}
 print(dict_1.keys())
 print(dict_1.values())
-print('--------------')
-print('Boolean: ')
+
+'''
+Boolean
+'''
+
 print(False)
 print(type(False))
-
-
 
 '''
 1.4 Python operators
@@ -87,17 +101,21 @@ print(x or y)
 
 
 '''
-1.5 if else statement
+1.5 if/elif/else statement
 '''
-dict_capitals={'Netherlands':'Amsterdam','USA':'Washington','Japan':'Tokyo'}
-list_capitals=list(dict_capitals.values())
+
+
+list_capitals=['Amsterdam', 'Tokyo', 'Washington']
 
 if 'Amsterdamm' in list_capitals:
-    print('Yes -nl')
-elif 'Washington' in list_capitals:
-    print('Yes -usa')
+    print('Yes')
 else:
     print('No')
+    
+number=3    
+
+if number % 3 > 0:
+    print(number + ' is a multiple of 3.')
 
 
 
@@ -112,6 +130,9 @@ name='Giuseppe'
 number=556
 list_1=['Dog', 'Cat', 'Bird']
 dictionary={"USA":"Washington D.C.", "France":"Paris", "India":"New Delhi"}
+
+for pet in list_1:
+    print('I love my: '+ pet)
 
 for item in dictionary.values():
     print(item)
