@@ -183,27 +183,33 @@ while number<5:
 1.7 Functions
 '''
 
+''' Shout function '''
+
 def shout_loud(list_here):
     
     for item in list_here:
         if type(item) is str:
-            print(item.upper() + '!!!!!!!!')
+            print((item.upper() + '!!!!!!!!'))
         else:
             print('NUMBER!!!!')
       
 shout_loud(['dog','cat',1,1.5])
 
 
+''' Odd even function '''
+
+def odd_even(number):
+    if number % 2 == 0:
+        return 'The number is even.'
+    else:
+        return 'The number is odd'
+
 
 '''
 1.8 Classes
 '''
 
-
-print(type(5))
-
-print(dir(5))
-
+''' Class coffee '''
 
 class coffee:
     def __init__(self):
@@ -218,18 +224,7 @@ class coffee:
         elif self.coffee==0:
             print('out of coffee!!!')
 
-class coffee_1:
-    def __init__(self):
-        self.coffee=30
-        self.sip=10
 
-    def take_a_sip(self):
-        if self.coffee>0:
-            print(self.coffee)
-            self.coffee=self.coffee-self.sip
-            
-        elif self.coffee==0:
-            print('out of coffee!!!')
     
 
 
@@ -239,17 +234,18 @@ print(a.take_a_sip())
 print(a.take_a_sip())
 print(a.take_a_sip())
 
+'''
+Various
+'''
 
-b=coffee()
-print(b.take_a_sip())
-print(b.take_a_sip())
-print(b.take_a_sip())
-print(b.take_a_sip())
-
-
+dir()
 print(print.__doc__)
 
-
 import pandas
+dir(pandas)
+pandas.__doc__
+pandas.DataFrame.__doc__
 
-print(len(dir(pandas)))
+d = {'col1': [1, 2], 'col2': [3, 4]}
+df = pandas.DataFrame(d)
+
