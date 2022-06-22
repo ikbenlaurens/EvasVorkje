@@ -142,7 +142,7 @@ Goal: Connect your remote repository with git on your laptop via ssh.
 
 2. Create a ssh-key pair locally on the laptop
 - `ssh-keygen -t ed25519 -C "your_email@example.com"` 
-   - where `-t` stands for the algorithm and `-C` for #todo...
+   - where `-t` stands for the algorithm and `-C` to add the github-emailaddress (config?)
 - Store the file in the default folder by providing this path to the function:
   - `~/.ssh/id_ed25519`
 - Passphrase can be used, but is often left blank (just press [ENTER])
@@ -187,7 +187,7 @@ All these steps come from the instructions in the github SSH-manual: [generating
 ### Back to Git
 
 1. Make sure you are still in apple pie
-2. from the (gitbash-)terminal, 
+2. From the (gitbash-)terminal, 
 - add a remote repository to your personal github
 - set the main branch to main (not master!)
 - push applepie to it's remote origin
