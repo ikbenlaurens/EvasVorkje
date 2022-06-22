@@ -183,7 +183,9 @@ Hi ehhalbers! You've successfully authenticated, but GitHub does not provide she
 
 All these steps come from the instructions in the github SSH-manual: [generating a new key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
- 
+### Creating a repository
+1. Create a repository on your github account
+ ![](../../Desktop/Screenshot 2022-06-22 at 13.07.57.png)
 ### Back to Git
 
 1. Make sure you are still in apple pie
