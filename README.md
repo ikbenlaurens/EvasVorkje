@@ -229,17 +229,17 @@ Confirm that you have both branches and that you are on main.
 - `python --version` or `python3 -V`
 2. Install python
   * mac: `brew install python@3.10`
-  * windows: download and install [python3.10](https://www.python.org/downloads/release/python-3104/)
+  * windows: download and install [python3.10](https://www.python.org/downloads/release/python-3104/) 
 3. Verify that it worked by writing your first python script
   * open a terminal and open python: `$ python3`
     ```
-    >>> print(‘me’) 
+    >>> print('me') 
     me
     >>> quit()
     ```
   * create new python-file: `$ vim print_me.py`
     ```
-    print(‘My first Python script works!’)
+    print('My first Python script works!')
     ```
   * press `ESC`, type `:wq` and press `[ENTER]`
   * run the script in the terminal: `python3 print_me.py` 
@@ -253,7 +253,7 @@ Confirm that you have both branches and that you are on main.
 For more info, check [venv](https://docs.python.org/3/library/venv.html)
 3. Activate the environment
 - mac: `$ . venv_<project_name>/bin/activate` or `$ source venv_<project_name>/bin/activate`
-- Windows: `$ source venv_project_name\Scripts\activate.bat` \
+- Windows: `$ source venv_project_name\Scripts\activate.bat` 
 
 If the virtual environment is active, you recognise it by th (prefix) in the command line: \
 `(venv_<project_name>) $ `
