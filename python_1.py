@@ -210,25 +210,30 @@ def odd_even(number):
 '''
 
 ''' Class coffee '''
-
 class coffee:
-    def __init__(self):
+
+    name='Python Bar'
+
+    def __init__(self, coffee_type):
         self.coffee=30
         self.sip=10
+        self.coffee_type=coffee_type
 
     def take_a_sip(self):
         if self.coffee>0:
-            print(self.coffee)
+            print('I take a sip of my favorite ' + self.coffee_type)
             self.coffee=self.coffee-self.sip
+            return self.coffee
             
         elif self.coffee==0:
-            print('out of coffee!!!')
+            return 'out of ' + self.coffee_type + '!!!!!!'
 
 
     
 
 
-a=coffee()
+a=coffee('espresso')
+print(coffee.name)
 print(a.take_a_sip())
 print(a.take_a_sip())
 print(a.take_a_sip())
@@ -240,6 +245,7 @@ Various
 
 dir()
 print(print.__doc__)
+
 
 import pandas
 dir(pandas)
