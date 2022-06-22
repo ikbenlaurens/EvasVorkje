@@ -159,7 +159,8 @@ Goal: Connect your remote repository with git on your laptop via ssh.
 - mac: `$ vim ~/.ssh/config`
 - windows: `vim /c/Users/<username>/.ssh/config` !! replace  <username> with the folder name on your laptop!
 
-This opens the file regardless of whether it exists, if it exists you see text, if the file is empty enter:
+This command opens the file regardless of whether it exists. If there is already text there, you have to be a bit careful with adding (is there a github host already? or other hosts?). \
+If the file is empty enter: \
 ! Make sure the path to the IdentityFile is the same as where your private key is located!  
 - mac:
 ```
@@ -176,6 +177,7 @@ Host github.com
 ```
 - When finished press `[ESC]` (basic mode),`:wq` (write, quit) and `[ENTER]`.
 
+5. Adding the private key to the configuration file we immediately did while creating the configuration file: this is the path after `IdentityFile <path>`.  
 
 6. Adding the ssh key to your github account
 - Copy the content of the .pub-file in your .ssh-folder to github (SSH key input)
@@ -213,51 +215,56 @@ Confirm that you have both branches and that you are on main.
 1. Check current versions
 - `python --version` or `python3 -V`
 2. Install python
-  * mac: `brew install python@3.10`
-  * windows: download and install [python3.10](https://www.python.org/downloads/release/python-3104/) 
+  - mac: `brew install python@3.10`
+  - windows: download and install [python3.10](https://www.python.org/downloads/release/python-3104/) 
 3. Verify that it worked by writing your first python script
-  * open a terminal and open python: `$ python3`
-    ```
-    >>> print('me') 
-    me
-    >>> quit()
-    ```
-  * create new python-file: `$ vim print_me.py`
+
+- create new python-file: `$ vim print_me.py`
     ```
     print('My first Python script works!')
     ```
-  * press `ESC`, type `:wq` and press `[ENTER]`
-  * run the script in the terminal: `python3 print_me.py` 
+- press `ESC`, type `:wq` and press `[ENTER]`
+- run the script in the terminal: 
+  
+  - mac: `python3 print_me.py` 
+  - windows: `$ where python` # find out where python is \
+             `C:\Python\Python310\python.exe` # returns probably something like this \ 
+             `$ /c/Python/Python310/python.exe print_me.py` # you have to explicitly call python in windows, and swap all backslashed to forward slash for gitbash.
+- If your first Python script works you are done. For now.
 
  
 ### Virtual environments & packages
 
 1. Create a virtual environment
-- `$ python3 -m venv venv_<project_name>` the `-m` stands for _import module_ `venv` \
+- mac: `$ python3 -m venv venv_<project_name>` the `-m` stands for _import module_ `venv` \
    ! make sure you have the proper python version. \
+- windows: `/c/Python/Python310/python.exe -m venv venv_<project_name>` \
 For more info, check [venv](https://docs.python.org/3/library/venv.html)
 3. Activate the environment
 - mac: `$ . venv_<project_name>/bin/activate` or `$ source venv_<project_name>/bin/activate`
-- Windows: `$ source venv_project_name\Scripts\activate.bat` 
+- windows: `$ source venv_project_name/Scripts/activate` 
 
 If the virtual environment is active, you recognise it by th (prefix) in the command line: \
 `(venv_<project_name>) $ `
+  
 4. Check which packages are present in the current virtual environment
 - `$ pip freeze`
+  
 5. Install some packages
 - `pip install pandas` \
    ! only install packages _inside_ of your virtual environment.
+  
 6. Export the packages to a file 
 - `pip freeze >> requirements.txt`
    - this will make the life of your colleagues and future you easier, why? see 11.
-7. Check the requirements-file, what is in there? Have you installed all that? Those are 'dependencies', 
-some packages need other packages to run. Those are installed as well.
+  
+7. Check the requirements-file, what is in there? Have you installed all that? Those are 'dependencies', some packages need other packages to run. Those are installed as well.
 
-8. `$ deactivate` will exit the virtual environment
+8. `$ deactivate` the virtual environment and `pip freeze` again. If it returns nothing everything went well!
 
 Optional:
-9. Create a new environment called venv_requirements_test
-10. activate it
+9. Create a new environment called venv_requirements_test \
+10. activate it \
 11. Try: `pip install -r requirements.txt`
 
 
