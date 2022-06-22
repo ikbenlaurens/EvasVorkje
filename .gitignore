@@ -1,5 +1,7 @@
+**/.DS_Store
+**/.idea
 venv_*
 db.*
-*/secrets.py
-*/__pycache__/
+**/secrets.py
+**/__pycache__/*
 
