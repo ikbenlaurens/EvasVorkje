@@ -144,37 +144,43 @@ Goal: Connect your remote repository with git on your laptop via ssh.
 - `ssh-keygen -t ed25519 -C "your_email@example.com"` 
    - where `-t` stands for the algorithm and `-C` to add the github-emailaddress (config?)
 - Store the file in the default folder by providing this path to the function:
-  - `~/.ssh/id_ed25519`
+  - mac: `~/.ssh/id_ed25519` or
+  - mac: `/Users/<userfolder>/.ssh/id_ed25519` ! replace userfolder with actual userfolder
+  - windows: `/c/Users/<username>/.ssh/id_ed25519`
 - Passphrase can be used, but is often left blank (just press [ENTER])
 - Now the fingerprint of the key is visible and the id_key and id_key.pub are stored in the .ssh folder.
+- Check if the fingerprint is created and the random-art-image appears
 
 3. Starting the ssh-agent (-> client / server)
 - `$ eval "$(ssh-agent -s)"` \
   `> Agent pid 59566` # expected output (number can differ)
 
-4. Check if you have a config-file in the .ssh folder
-- `$ open ~/.ssh/config` \
-  `> The file /Users/you/.ssh/config does not exist.`
+4. Check if you have a config-file in the .ssh folder, if not create it
+- mac: `$ vim ~/.ssh/config`
+- windows: `vim /c/Users/<username>/.ssh/config` !! replace  <username> with the folder name on your laptop!
 
-
-4b. Create config file (if not present yet, else continue with 5) \
-- `vim ~/.ssh/config`  # note we use again vim here!
-- `i` to go into insert mode and type, or paste:
+This opens the file regardless of whether it exists, if it exists you see text, if the file is empty enter:
+! Make sure the path to the IdentityFile is the same as where your private key is located!  
+- mac:
 ```
 Host github.com
    AddKeysToAgent yes
    UseKeychain yes
    IdentityFile ~/.ssh/id_ed25519
 ```
+- windows: !! replace  <username> with the folder name on your laptop!
+```
+Host github.com
+   AddKeysToAgent yes
+   IdentityFile /c/Users/<username>/.ssh/id_ed25519
+```
 - When finished press `[ESC]` (basic mode),`:wq` (write, quit) and `[ENTER]`.
-    
 
-5. Adding the ssh key to the configuration-file
-- `ssh-add -K ~/.ssh/id_ed25519`
 
 6. Adding the ssh key to your github account
-- Follow the instructions on the github manual: [Add a SSH key to Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
-
+- Copy the content of the .pub-file in your .ssh-folder to github (SSH key input)
+- See the instructions on the github manual: [Add a SSH key to Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+  
 7. Test if your ssh connection was established correctly
 - `ssh -T git@github.com` # if it returns your username as configured in your github account, the connection is succesfull and you can continue with cloning or pushing the repo. 
 ``` 
@@ -193,7 +199,7 @@ Create a new folder, clone the python_dev_env repository from *your* remote.
 3. Go into the folder
 - `cd <sensible_name>`
 4. Fetch the branches
-- `git fetch` # now all the remote branches appear local (currently only main and dev)
+- `git fetch -vv` # now all the remote branches appear local (currently only main and dev)
     ```commandline
     *main
      dev
