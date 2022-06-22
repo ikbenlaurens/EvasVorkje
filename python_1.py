@@ -18,9 +18,7 @@ print(x)
 1.3 Datatypes
 '''
 
-'''
-Text
-'''
+''' Text '''
 x='this is a string'
 print(x)
 
@@ -28,42 +26,34 @@ print(x)
 Numeric
 '''
 
-'''
-Integer
-'''
+''' Integer '''
 
 x=5
 print(type(x))
 print(x)
 
-'''
-Float
-'''
+''' Float '''
 
 y=5.2
 print(type(y))
 
-'''
-Sequence
-'''
+''' Sequence '''
 
 list_1=[1,2,3]
 tuple_1=(1,2,3)
 range_1=range(4)
+
 print(type(tuple_1))
 print(tuple_1)
+print(list(range(6)))
 
-'''
-Mapping
-'''
+''' Mapping '''
 
 dict_1={'Netherlands':'Amsterdam','USA':'Washington','Japan':'Tokyo'}
 print(dict_1.keys())
 print(dict_1.values())
 
-'''
-Boolean
-'''
+''' Boolean '''
 
 print(False)
 print(type(False))
@@ -71,7 +61,9 @@ print(type(False))
 '''
 1.4 Python operators
 '''
-print('Aritmetic operators')
+
+'''aritmetic operators'''
+
 print(2+2)
 print(2+2.5)
 print(3-2)
@@ -80,30 +72,37 @@ print(6/3)
 print(17%12)
 print(2**3)
 print(5//2)
-print('Comparison operators')
+
+'''Comparison operators'''
+
 print(2==2)
 print(2==3)
 print(2<3)
 print(2!=3)
-print('Membership operators')
+
+'''Membership operators'''
+
 print('K' in 'ciao')
 print('C' in 'Ciao')
-print('Identity operators')
+
+'''Identity operators'''
+
 print(4 is 4)
 print(4 is 5)
 print(4 is not 5)
-print('Logical operators')
+
+'''Logical operators'''
+
 x=5
 y=6
 print(x and y)
 print(x or y)
 
-
-
 '''
 1.5 if/elif/else statement
 '''
 
+''' Capitals  '''
 
 list_capitals=['Amsterdam', 'Tokyo', 'Washington']
 
@@ -112,37 +111,65 @@ if 'Amsterdamm' in list_capitals:
 else:
     print('No')
     
+''' Multiples  '''
+
 number=3    
 
-if number % 3 > 0:
-    print(number + ' is a multiple of 3.')
+if number % 3 == 0:
+    print(str(number) + ' is a multiple of 3.')
+else:
+    print(str(number) + ' is not a multiple of 3.')
 
+''' Numbers within range '''
 
+number_2=4
 
-print('some more code')
+if number_2 >= 5 and number_2 <= 10:
+    print('Number is within range.')
+elif number_2 < 5:
+    print('Number is lower than range.')
+else:
+    print('Number is higher than range.')
 
 
 '''
 1.6 
 For Loops
 '''
-name='Giuseppe'
-number=556
-list_1=['Dog', 'Cat', 'Bird']
-dictionary={"USA":"Washington D.C.", "France":"Paris", "India":"New Delhi"}
+
+''' Animals '''
+
+list_1=['Cat', 'Dog', 'Bird']
 
 for pet in list_1:
-    print('I love my: '+ pet)
+    print('I love my: ' + pet)
 
-for item in dictionary.values():
-    print(item)
+''' Capitals for loop '''
+
+capitals={"USA":"Washington D.C.", "France":"Paris", "India":"New Delhi"}
+
+for key, value in capitals.items():
+    print('The capital of {key} is {value}.'.format(key=key, value=value) )
+
+
+''' Ice Cream '''
+
+bottom=['Cone', 'Cup', 'Stick']
+
+base=['Vanilla', 'Chocolate']
+
+top=['Cherry', 'Hagel slag', 'Nuts']
+
+print('All ice cream combinations: ')
+
+for item in bottom:
+    for item_2 in base:
+        for item_3 in top:
+            print('Ice cream bottom: ' + item + ', base: ' + item_2 + ', top: ' + item_3)
 
 '''
 While Loops
 '''
-answers='Haarlem'
-
-capitals={'Noord Holland':'Haarlem'}
 
 number=1
 
@@ -156,27 +183,33 @@ while number<5:
 1.7 Functions
 '''
 
+''' Shout function '''
+
 def shout_loud(list_here):
     
     for item in list_here:
         if type(item) is str:
-            print(item.upper() + '!!!!!!!!')
+            print((item.upper() + '!!!!!!!!'))
         else:
             print('NUMBER!!!!')
       
 shout_loud(['dog','cat',1,1.5])
 
 
+''' Odd even function '''
+
+def odd_even(number):
+    if number % 2 == 0:
+        return 'The number is even.'
+    else:
+        return 'The number is odd'
+
 
 '''
 1.8 Classes
 '''
 
-
-print(type(5))
-
-print(dir(5))
-
+''' Class coffee '''
 
 class coffee:
     def __init__(self):
@@ -191,18 +224,7 @@ class coffee:
         elif self.coffee==0:
             print('out of coffee!!!')
 
-class coffee_1:
-    def __init__(self):
-        self.coffee=30
-        self.sip=10
 
-    def take_a_sip(self):
-        if self.coffee>0:
-            print(self.coffee)
-            self.coffee=self.coffee-self.sip
-            
-        elif self.coffee==0:
-            print('out of coffee!!!')
     
 
 
@@ -212,17 +234,18 @@ print(a.take_a_sip())
 print(a.take_a_sip())
 print(a.take_a_sip())
 
+'''
+Various
+'''
 
-b=coffee()
-print(b.take_a_sip())
-print(b.take_a_sip())
-print(b.take_a_sip())
-print(b.take_a_sip())
-
-
+dir()
 print(print.__doc__)
 
-
 import pandas
+dir(pandas)
+pandas.__doc__
+pandas.DataFrame.__doc__
 
-print(len(dir(pandas)))
+d = {'col1': [1, 2], 'col2': [3, 4]}
+df = pandas.DataFrame(d)
+
