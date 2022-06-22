@@ -183,29 +183,8 @@ Hi ehhalbers! You've successfully authenticated, but GitHub does not provide she
 
 All these steps come from the instructions in the github SSH-manual: [generating a new key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
- 
-### Back to Git
+### Clone the repository from your github 
 
-1. Make sure you are still in apple pie
-2. From the (gitbash-)terminal, 
-- add a remote repository to your personal github
-- set the main branch to main (not master!)
-- push applepie to it's remote origin
-    - if it complains that it cannot find the repository, set the url manually and try again
-      - `$ git remote set-url origin https://github.com/<username>/<project>.git`
-      - `$ git push -u -f origin main`
-
- ```
-     $ git remote add origin git@github.com:<username>/<project>.git
-     $ git branch -m main
-     $ git push -u -f origin main
- ```
-
- 3. Check on github.com whether you see your code. If so, done!
-
-
-### Prep for the next part 
-you now know how git works ;)
 Create a new folder, clone the python_dev_env repository from *your* remote.
 1. leave applepie, you also left your git-repo now
 - `cd ..` or `cd ~/workspace`
