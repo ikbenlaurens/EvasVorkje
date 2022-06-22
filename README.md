@@ -124,9 +124,12 @@ PS: love yourself, [learn vim](https://vim-adventures.com/![image](https://user-
 1. Go to [github.com](https://github.com/) and create github-account (also useful for portfolio puposes)\
 note: it is sensible to do this with your private email :)
  
+
 2. Fork, not clone, the current repo to your own account:
    - on https://github.com/ehhalbers/python-dev-env, click [fork]
    - name your fork something senible and confirm
+
+
 3. Go to your github and check that the fork of the project is present there.
 
  
@@ -145,7 +148,7 @@ Goal: Connect your remote repository with git on your laptop via ssh.
    - where `-t` stands for the algorithm and `-C` to add the github-emailaddress (config?)
 - Store the file in the default folder by providing this path to the function:
   - mac: `~/.ssh/id_ed25519` or
-  - mac: `/Users/<userfolder>/.ssh/id_ed25519` ! replace userfolder with actual userfolder
+  - mac: `/Users/<username>/.ssh/id_ed25519` ! replace `<username>` with actual userfolder
   - windows: `/c/Users/<username>/.ssh/id_ed25519`
 - Passphrase can be used, but is often left blank (just press [ENTER])
 - Now the fingerprint of the key is visible and the id_key and id_key.pub are stored in the .ssh folder.
@@ -157,11 +160,11 @@ Goal: Connect your remote repository with git on your laptop via ssh.
 
 4. Check if you have a config-file in the .ssh folder, if not create it
 - mac: `$ vim ~/.ssh/config`
-- windows: `vim /c/Users/<username>/.ssh/config` !! replace  <username> with the folder name on your laptop!
+- windows: `vim /c/Users/<username>/.ssh/config` !! replace  `<username>` with the folder name on your laptop!
 
 This command opens the file regardless of whether it exists. If there is already text there, you have to be a bit careful with adding (is there a github host already? or other hosts?). \
 If the file is empty enter: \
-! Make sure the path to the IdentityFile is the same as where your private key is located!  
+    ! Make sure the path to the IdentityFile is the same as where your private key is located!  
 - mac:
 ```
 Host github.com
@@ -169,7 +172,7 @@ Host github.com
    UseKeychain yes
    IdentityFile ~/.ssh/id_ed25519
 ```
-- windows: !! replace  <username> with the folder name on your laptop!
+- windows: !! replace `<username>` with the folder name on your laptop!
 ```
 Host github.com
    AddKeysToAgent yes
@@ -178,6 +181,7 @@ Host github.com
 - When finished press `[ESC]` (basic mode),`:wq` (write, quit) and `[ENTER]`.
 
 5. Adding the private key to the configuration file we immediately did while creating the configuration file: this is the path after `IdentityFile <path>`.  
+
 
 6. Adding the ssh key to your github account
 - Copy the content of the .pub-file in your .ssh-folder to github (SSH key input)
@@ -228,7 +232,7 @@ Confirm that you have both branches and that you are on main.
   
   - mac: `python3 print_me.py` 
   - windows: `$ where python` # find out where python is \
-             `C:\Python\Python310\python.exe` # returns probably something like this \ 
+             `C:\Python\Python310\python.exe` # returns probably something like this \  
              `$ /c/Python/Python310/python.exe print_me.py` # you have to explicitly call python in windows, and swap all backslashed to forward slash for gitbash.
 - If your first Python script works you are done. For now.
 
@@ -241,7 +245,8 @@ Confirm that you have both branches and that you are on main.
 - windows: `/c/Python/Python310/python.exe -m venv venv_<project_name>` \
 For more info, check [venv](https://docs.python.org/3/library/venv.html)
 3. Activate the environment
-- mac: `$ . venv_<project_name>/bin/activate` or `$ source venv_<project_name>/bin/activate`
+- mac: `$ . venv_<project_name>/bin/activate` or \ 
+       `$ source venv_<project_name>/bin/activate`
 - windows: `$ source venv_project_name/Scripts/activate` 
 
 If the virtual environment is active, you recognise it by th (prefix) in the command line: \
@@ -265,7 +270,7 @@ If the virtual environment is active, you recognise it by th (prefix) in the com
 Optional:
 9. Create a new environment called venv_requirements_test \
 10. activate it \
-11. Try: `pip install -r requirements.txt`
+11. Try: `pip install -r requirements.txt` and `pip freeze` to see the result.
 
 
 ### PyCharm
@@ -274,19 +279,44 @@ Optional:
   * https://www.jetbrains.com/pycharm/download
    
 2. Open project: <project_folder> and check all the settings:
-- Check in the terminal that the venv is still activated
-- Check The interpreter Python3.10(project) <- should be from the venv, edit interpreter shows the packages
-- Check the git branch: dev
 
-2b. [Python project structure](https://realpython.com/python-application-layouts/)
-                                                
-3. Set the configuration:
+- For windows, set the terminal to gitbash: \
+    Go to Settings > Tools > Terminal > Application Settings \
+    Shell path: `C:\Program Files\Git\bin\sh.exe --login`
+    - close and reopen the terminal. It should now be gitbash.
+
+- Check in the terminal that the git branch: main 
+
+4. Set the interpreter Python3.10(project) <- should be from the venv, edit interpreter shows the packages
+
+5. Set the Run/Debug configuration
 - [Configurations] > Edit configuration
 - `+ ` to add, choose 'Python'
   - Name: 'main' # or <project_name>
-  - Script path: /workspace/<project_folder>/main.py
+  - Script path: /workspace/<project_folder>/dev_env/main.py
   - Parameters: input arguments can be proved here if the script requires that, e.g. true \
     ! This is the 'PyCharm'-version of `python main.py flag=true`.
-  - Make sure the Python Interpreter is referring to the location of the virtual environment
-  - Make sure the Working directory refers for <project_folder>
-  - Run the code
+  - Python Interpreter: the location of the virtual environment
+  - Working directory: refers to `<project_folder>`
+
+6. Run the configuration
+- if you see `Yaay!` in the Run-console, all worked!
+
+Bonus: \
+
+7. Authorize PyCharm to your GitHub as well
+- change something in main.py
+- add the file to the git tracking
+- commit the file 
+- try to push to the repository 
+
+note: this will not work, because _you_ authorized to github, but if you are working with PyCharm, PyCharm acts on your behalf. 
+      Therefore, you have to authorize PyCharm as well.
+
+- PyCharm prompts you to login to github via token or sign in via webpage.
+- Choose sign in via web, sign in and authorize PyCharm.
+- If your push succeeded, all went well!
+
+
+
+More info on the [Python project structure](https://realpython.com/python-application-layouts/)
