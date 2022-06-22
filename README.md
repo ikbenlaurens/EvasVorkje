@@ -144,37 +144,45 @@ Goal: Connect your remote repository with git on your laptop via ssh.
 - `ssh-keygen -t ed25519 -C "your_email@example.com"` 
    - where `-t` stands for the algorithm and `-C` to add the github-emailaddress (config?)
 - Store the file in the default folder by providing this path to the function:
-  - `~/.ssh/id_ed25519`
+  - mac: `~/.ssh/id_ed25519` or
+  - mac: `/Users/<userfolder>/.ssh/id_ed25519` ! replace userfolder with actual userfolder
+  - windows: `/c/Users/<username>/.ssh/id_ed25519`
 - Passphrase can be used, but is often left blank (just press [ENTER])
 - Now the fingerprint of the key is visible and the id_key and id_key.pub are stored in the .ssh folder.
+- Check if the fingerprint is created and the random-art-image appears
 
 3. Starting the ssh-agent (-> client / server)
 - `$ eval "$(ssh-agent -s)"` \
   `> Agent pid 59566` # expected output (number can differ)
 
-4. Check if you have a config-file in the .ssh folder
-- `$ open ~/.ssh/config` \
-  `> The file /Users/you/.ssh/config does not exist.`
+4. Check if you have a config-file in the .ssh folder, if not create it
+- mac: `$ vim ~/.ssh/config`
+- windows: `vim /c/Users/<username>/.ssh/config` !! replace  <username> with the folder name on your laptop!
 
-
-4b. Create config file (if not present yet, else continue with 5) \
-- `vim ~/.ssh/config`  # note we use again vim here!
-- `i` to go into insert mode and type, or paste:
+This command opens the file regardless of whether it exists. If there is already text there, you have to be a bit careful with adding (is there a github host already? or other hosts?). \
+If the file is empty enter: \
+! Make sure the path to the IdentityFile is the same as where your private key is located!  
+- mac:
 ```
 Host github.com
    AddKeysToAgent yes
    UseKeychain yes
    IdentityFile ~/.ssh/id_ed25519
 ```
+- windows: !! replace  <username> with the folder name on your laptop!
+```
+Host github.com
+   AddKeysToAgent yes
+   IdentityFile /c/Users/<username>/.ssh/id_ed25519
+```
 - When finished press `[ESC]` (basic mode),`:wq` (write, quit) and `[ENTER]`.
-    
 
-5. Adding the ssh key to the configuration-file
-- `ssh-add -K ~/.ssh/id_ed25519`
+5. Adding the private key to the configuration file we immediately did while creating the configuration file: this is the path after `IdentityFile <path>`.  
 
 6. Adding the ssh key to your github account
-- Follow the instructions on the github manual: [Add a SSH key to Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
-
+- Copy the content of the .pub-file in your .ssh-folder to github (SSH key input)
+- See the instructions on the github manual: [Add a SSH key to Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+  
 7. Test if your ssh connection was established correctly
 - `ssh -T git@github.com` # if it returns your username as configured in your github account, the connection is succesfull and you can continue with cloning or pushing the repo. 
 ``` 
@@ -193,7 +201,7 @@ Create a new folder, clone the python_dev_env repository from *your* remote.
 3. Go into the folder
 - `cd <sensible_name>`
 4. Fetch the branches
-- `git fetch` # now all the remote branches appear local (currently only main and dev)
+- `git fetch -vv` # now all the remote branches appear local (currently only main and dev)
     ```commandline
     *main
      dev
@@ -207,51 +215,56 @@ Confirm that you have both branches and that you are on main.
 1. Check current versions
 - `python --version` or `python3 -V`
 2. Install python
-  * mac: `brew install python@3.10`
-  * windows: download and install [python3.10](https://www.python.org/downloads/release/python-3104/) 
+  - mac: `brew install python@3.10`
+  - windows: download and install [python3.10](https://www.python.org/downloads/release/python-3104/) 
 3. Verify that it worked by writing your first python script
-  * open a terminal and open python: `$ python3`
-    ```
-    >>> print('me') 
-    me
-    >>> quit()
-    ```
-  * create new python-file: `$ vim print_me.py`
+
+- create new python-file: `$ vim print_me.py`
     ```
     print('My first Python script works!')
     ```
-  * press `ESC`, type `:wq` and press `[ENTER]`
-  * run the script in the terminal: `python3 print_me.py` 
+- press `ESC`, type `:wq` and press `[ENTER]`
+- run the script in the terminal: 
+  
+  - mac: `python3 print_me.py` 
+  - windows: `$ where python` # find out where python is \
+             `C:\Python\Python310\python.exe` # returns probably something like this \ 
+             `$ /c/Python/Python310/python.exe print_me.py` # you have to explicitly call python in windows, and swap all backslashed to forward slash for gitbash.
+- If your first Python script works you are done. For now.
 
  
 ### Virtual environments & packages
 
 1. Create a virtual environment
-- `$ python3 -m venv venv_<project_name>` the `-m` stands for _import module_ `venv` \
+- mac: `$ python3 -m venv venv_<project_name>` the `-m` stands for _import module_ `venv` \
    ! make sure you have the proper python version. \
+- windows: `/c/Python/Python310/python.exe -m venv venv_<project_name>` \
 For more info, check [venv](https://docs.python.org/3/library/venv.html)
 3. Activate the environment
 - mac: `$ . venv_<project_name>/bin/activate` or `$ source venv_<project_name>/bin/activate`
-- Windows: `$ source venv_project_name\Scripts\activate.bat` 
+- windows: `$ source venv_project_name/Scripts/activate` 
 
 If the virtual environment is active, you recognise it by th (prefix) in the command line: \
 `(venv_<project_name>) $ `
+  
 4. Check which packages are present in the current virtual environment
 - `$ pip freeze`
+  
 5. Install some packages
 - `pip install pandas` \
    ! only install packages _inside_ of your virtual environment.
+  
 6. Export the packages to a file 
 - `pip freeze >> requirements.txt`
    - this will make the life of your colleagues and future you easier, why? see 11.
-7. Check the requirements-file, what is in there? Have you installed all that? Those are 'dependencies', 
-some packages need other packages to run. Those are installed as well.
+  
+7. Check the requirements-file, what is in there? Have you installed all that? Those are 'dependencies', some packages need other packages to run. Those are installed as well.
 
-8. `$ deactivate` will exit the virtual environment
+8. `$ deactivate` the virtual environment and `pip freeze` again. If it returns nothing everything went well!
 
 Optional:
-9. Create a new environment called venv_requirements_test
-10. activate it
+9. Create a new environment called venv_requirements_test \
+10. activate it \
 11. Try: `pip install -r requirements.txt`
 
 
