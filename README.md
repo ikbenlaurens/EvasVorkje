@@ -183,7 +183,7 @@ Hi ehhalbers! You've successfully authenticated, but GitHub does not provide she
 
 All these steps come from the instructions in the github SSH-manual: [generating a new key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
-### Clone the repository from you github 
+### Clone the repository from your github 
 
 Create a new folder, clone the python_dev_env repository from *your* remote.
 1. leave applepie, you also left your git-repo now
