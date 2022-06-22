@@ -1,9 +1,7 @@
 # Ordina Knowlegde Session - "Setting up a Python development environment"
 ## by Eva Albers & Giuseppe Lecca
 
-**notes beforehand:
-- it's a good habit to type stuff <- you learn faster (of course this is up to you, you can also copy the command)
-- ...
+note: it's a good habit to type stuff <- you learn faster (of course this is up to you, you can also copy the commands)
 
 CONTENT
 
@@ -15,22 +13,25 @@ CONTENT
 - Package management (pip and pypi)
 - PyCharm
 
-REQUIREMENTS
+SOFTWARE TO BE INSTALLED
 
 - git
-  - gitbash
-  - ssh 
+  - gitbash, included
+  - ssh, included
 - python
-- pycharm, CE
+- pycharm, Community Edition
 
 
 ### Git
 
-1. Install git (if not already installed)\
-mac: `$ git --version`   # see if it exists, if not it prompts to install \
-windows: [download git](https://git-scm.com/download/win) 
-- on windows, [x] Use bundled OpenSSH
-- type "Git Bash" in Windows search and bookmark it on your taskbar. This is your terminal for today.
+1. Install git (if not already installed)
+- mac: `$ git --version`   # see if it exists, if not it prompts to install 
+- windows: [download git](https://git-scm.com/download/win)  
+    - during installation choose: 
+    - [x] Use bundled OpenSSH 
+    - after installation: \
+      type "Git Bash" in Windows search and bookmark it on your taskbar. \
+      This is your terminal for today.
 
 2. Configure (one time only) your [git configuration](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
 ```
@@ -38,32 +39,39 @@ $ git config --global user.name "Purno de Purno"
 $ git config --global user.email purno@purno.com
 $ git config --list    # checks which config is there
 ```
+This sets your username and email for all of your git commits.
 
 #### Let's make apple pie!
-3. Create workspace-folder (<-makes the rest of your life easier) and a project-folder
+3. Create a workspace-folder (<-makes the rest of your life easier), a project-folder
  navigate there  and  initialize a .git-repository:
 ```
  $ mkdir ~/workspace/applepie
  $ cd ~/workspace/applepie 
  $ git init                 
 ```
+You can recognise a git-repository by the `.git` -file that is present in the root of your project. \
+`ls -a` shows all files, including hidden (.filename) files. \
+`> .. . .git` you should see the .git file in the folder now. 
 
-4. Create the apple pie string and hash it\
-Encode: `$ echo "Apple Pie" | git hash-object --stdin -w` \
-Decode: `$ git cat-file -p 23991897e13e47ed0adb91a0082c31c82fe0cbe5` \
-\
+4. Create the apple pie string and hash it 
+- Encode: `$ echo "Apple Pie" | git hash-object --stdin -w` 
+  - with this you `echo` (=print) the string apple pie into the input ( `<args for input> | function` ) of 
+  the `git hash-object`-function and tell the function to use the `--stdin` (input arguments given). 
+  The `-w` writes the output of the function `hash-object` to a `.git`-file.
+
+- Decode: `$ git cat-file -p 23991897e13e47ed0adb91a0082c31c82fe0cbe5` 
+  - with this you can decode the hash (`239918...`) back into the byte-value that it was, in this case the string Applie Pie.
+
+Note: that on windows the string encoding is different from mac. Therefore the exact hash on a windows machine is different from that on mac. However, for the functionality of git this doesn't matter.
+
 5. Let's create some folder-structure around it 
- * `ls -a` # check what is present in the folder 
- * `mkdir recipes` # make a folder 
- * `vim menu.txt` # create file 
- * `i`, `Apple Pie`, `[ESC]`,`:wq`, `[ENTER]` # fill file with pie 
- * `vim recipes/apple_pie.txt`  # create a new file named apple_pie.txt 
- * insert here `Apple Pie` as well, save the file 
- 
- * `rm -rf <dir>` # force remove directory, if you made a mistake 
- * `rm <file>` # to remove file 
- * `cd <dir>` # enter a directory 
- * `cd ..` # go back one directory 
+- `ls -a` # check what is present in the folder 
+- `mkdir recipes` # make a folder 
+- `vim menu.txt` # create file 
+- `i`, `Apple Pie`, `[ESC]`,`:wq`, `[ENTER]` # fill file with pie 
+- `vim recipes/apple_pie.txt`  # create a new file named apple_pie.txt 
+- insert here `Apple Pie` as well, save the file 
+
 
 Check that you have the following structure:
 ```
@@ -73,24 +81,38 @@ Check that you have the following structure:
    menu.txt
 ```
 
-6. Add the files git \  
-- `git status`  # check which files are tracked, if is it the files that you expect, continue
-- `git add *` # add all untracked files to the commit, (note: normally I advice against using `*` for all, since you can accidentally check in unwanted material)
-- `git commit -m "First commit!"   # actually store the code in the repository 
+If you accidentally made a type or created a folder in another location:
+- `rm -rf <dir>` # force remove directory, if you made a mistake
+- `rm <file>` # to remove file
+- `cd <dir>` # enter a directory
+- `cd ..` # go back one directory 
 
-7. Now the fun starts: use the following commands to find the apple pie in the recipes-folder. \
+6. Add the files git 
+- `git status`  # check which files are tracked, if is it the files that you expect, continue
+- `git add *` # add all untracked files to the commit
+
+note: normally I advice against using `*` for `all`, since you can accidentally check in unwanted material.
+Normally it's better to type the files/ folders and only add the ones you actually need:
+```commandline
+git add recipes/*
+git add menu.txt
+```
+- `git status` # double check that is green what needs to be checked in, and red is what is not part of the commit.
+- `git commit -m "First commit!"`  # actually store the code in the repository 
+
+7. Now the fun starts: use the following commands to find the apple pie in the recipes-folder. 
 - `git log` 
-- `git cat-file -p <sha1>` 
+- `git cat-file -p <sha1>` \
 Remember: git has `blob`, `tree`, and `commit` 
 
-Optionally: \
-8. Modify menu.txt so that it contains Apple Pie and Cheese Cake \
+Optionally: 
+8. Modify menu.txt so that it contains Apple Pie and Cheese Cake 
 - use vim to open menu add Cheese Cake, save and close the file
 - check the status `git status`
 - see what has changed `git diff`
 - add the menu.txt file `git add menu.txt`
 - commit the file `git commit -m "add cheese cake"`
-- check the log and see which objects are present in this second commit
+- check the log and see which objects are present in this second commit. \
 Hint: it's no blob, tree or commit.
 
 PS: love yourself, [learn vim](https://vim-adventures.com/![image](https://user-images.githubusercontent.com/59306380/174646861-69a49203-6a81-4ff0-bef6-6cc8723f3e50.png)
@@ -102,99 +124,104 @@ PS: love yourself, [learn vim](https://vim-adventures.com/![image](https://user-
 1. Go to [github.com](https://github.com/) and create github-account (also useful for portfolio puposes)\
 note: it is sensible to do this with your private email :)
  
-2. Fork the current repo to your own account!
-  * on https://github.com/ehhalbers/python-dev-env, click [fork]
-  * name your fork something senible and confirm
+2. Fork, not clone, the current repo to your own account:
+   - on https://github.com/ehhalbers/python-dev-env, click [fork]
+   - name your fork something senible and confirm
+3. Go to your github and check that the fork of the project is present there.
 
  
 ### SSH
 
-Connect your repo with git on your laptop via ssh:
-0. Make sure you have ssh installed on your laptop:
-  * type `ssh` in the terminal and if you see something like this it is recognized
-  * ```
+Goal: Connect your remote repository with git on your laptop via ssh.
+1. Make sure you have ssh installed on your laptop:
+- type `ssh` in the (gitbash-)terminal and if you see something like this it is recognized
+    ```
     $ ssh
     usage: ssh [options][options]
- ```
-1. Create a ssh-key pair locally on the laptop
-  * `ssh-keygen -t ed25519 -C "your_email@example.com"` where `-t` stands for the algorithm and `-C` for #todo...
-  * Store the file in the default folder
-  * `~/.ssh/id_ed25519`
-  * Passphrase can be used, but is often left blank (just press [ENTER])
-  * Now the fingerprint of the key is visible and the id_key and id_key.pub are stored on the .ssh folder.
+    ```
 
-2. Starting the ssh-agent (-> client / server)
-  * `$ eval "$(ssh-agent -s)"`
-  * expected output: `> Agent pid 59566`
+2. Create a ssh-key pair locally on the laptop
+- `ssh-keygen -t ed25519 -C "your_email@example.com"` 
+   - where `-t` stands for the algorithm and `-C` for #todo...
+- Store the file in the default folder by providing this path to the function:
+  - `~/.ssh/id_ed25519`
+- Passphrase can be used, but is often left blank (just press [ENTER])
+- Now the fingerprint of the key is visible and the id_key and id_key.pub are stored in the .ssh folder.
 
-3. Check if you have a config-file in the .ssh folder
-  * `$ open ~/.ssh/config`
-  * output: `> The file /Users/you/.ssh/config does not exist.`
+3. Starting the ssh-agent (-> client / server)
+- `$ eval "$(ssh-agent -s)"` \
+  `> Agent pid 59566` # expected output (number can differ)
+
+4. Check if you have a config-file in the .ssh folder
+- `$ open ~/.ssh/config` \
+  `> The file /Users/you/.ssh/config does not exist.`
 
 
-3b. Create config file (if not present yet, else add the key):
-    * `vim ~/.ssh/config`  # note we use again vim here!
-    * `i` to go into insert mode and type:
-    * ```
-      Host github.com
-           AddKeysToAgent yes
-           UseKeychain yes
-           IdentityFile ~/.ssh/id_ed25519
-           ```
-    * When finished press `[ESC]` (basic mode),`:wq` (write, quit) and `[ENTER]`.
+4b. Create config file (if not present yet, else continue with 5) \
+- `vim ~/.ssh/config`  # note we use again vim here!
+- `i` to go into insert mode and type, or paste:
+```
+Host github.com
+   AddKeysToAgent yes
+   UseKeychain yes
+   IdentityFile ~/.ssh/id_ed25519
+```
+- When finished press `[ESC]` (basic mode),`:wq` (write, quit) and `[ENTER]`.
     
 
-4. Adding the ssh key to the configuration-file
-  * `ssh-add -K ~/.ssh/id_ed25519`
+5. Adding the ssh key to the configuration-file
+- `ssh-add -K ~/.ssh/id_ed25519`
 
-5. Adding the ssh key to your github account
-  * Follow the instructions on the github manual: [Add a SSH key to Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+6. Adding the ssh key to your github account
+- Follow the instructions on the github manual: [Add a SSH key to Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
 
-6.  Test if your ssh connection was established correctly
-  * `ssh -T git@github.com` # if it returns your username as configured in your github account, the connection is succesfull and you can continue with cloning or pushing the repo.
+7. Test if your ssh connection was established correctly
+- `ssh -T git@github.com` # if it returns your username as configured in your github account, the connection is succesfull and you can continue with cloning or pushing the repo. 
+``` 
+Hi ehhalbers! You've successfully authenticated, but GitHub does not provide shell access.
+```
 
-All these steps come from: the instructions on github
-  * SSH: [generating a new key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+All these steps come from the instructions in the github SSH-manual: [generating a new key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
  
 ### Back to Git
 
 1. Make sure you are still in apple pie
-2. add a remote repository to your personal github and push applepie there
+2. from the (gitbash-)terminal, 
+- add a remote repository to your personal github
+- set the main branch to main (not master!)
+- push applepie to it's remote origin
+    - if it complains that it cannot find the repository, set the url manually and try again
+      - `$ git remote set-url origin https://github.com/<username>/<project>.git`
+      - `$ git push -u -f origin main`
+
  ```
-     $ git remote add origin git@github.com:ehhalbers/<your_name>.git
-     $ git push -u origin main
+     $ git remote add origin git@github.com:<username>/<project>.git
+     $ git branch -m main
+     $ git push -u -f origin main
  ```
- 3. Check on github.com if you see your code. If so, done!
- 
->>>>>>>> This can be removed
- 
+
+ 3. Check on github.com whether you see your code. If so, done!
+
+
+### Prep for the next part 
+you now know how git works ;)
+Create a new folder, clone the python_dev_env repository from *your* remote.
+1. leave applepie, you also left your git-repo now
+- `cd ..` or `cd ~/workspace`
 2. Clone the repository present on your github account
-  * `git clone https://github.com/<your_nane>/<sensible_name>`
-2. Fetch the branches
-  * `git fetch` # now all the remote branches appear local (currently only main)
-3. Create a new development-branch
-  * `git checkout -b dev`
-4. Check on which branch you are
-  * `git branch` # the checkout branch has a star 
-  *   ! You can move between branches with `git switch <branch_name>`
-  <do some work>
-5. Check the status of your work
-  * `git status` # red is not tracked, green is tracked
-6. Add the files you need
-  * `git add <files you need>`
-7. Commit the files you need
-  * `git commit -m '<project_name>: <what you did>'` # the `-m` stand for message to add, e.g. `git commit -m "webapp: initial commit"`
-8. Push the files to the remote
-  * `git push --set-upstream origin dev` # the `--set-upstream` is only necessary once, after that the local branch keeps tracking the remote.
+- `git clone https://github.com/<your_nane>/<sensible_name_that_you_gave>.git`
+3. Go into the folder
+- `cd <sensible_name>`
+4. Fetch the branches
+- `git fetch` # now all the remote branches appear local (currently only main and dev)
+    ```commandline
+    *main
+     dev
+    ```
+Confirm that you have both branches and that you are on main.
 
 
-And now you think you're there, but you're not. If you go to github.com and login to your repo, you'll see that there are two branches. The last step is to compare both branches and 'merge' them if it is code you want to keep. This is irl often one with a four eye principle, but for now you can do it yourself.
-
-
- If you have done that, you go back to your local terminal, switch to the main branch and pull the new code in `git pull`. What happens with the files?
-
->>>>>>>> until here
 
 ### Python
 
@@ -220,26 +247,33 @@ And now you think you're there, but you're not. If you go to github.com and logi
  
 ### Virtual environments & packages
 
-2. Create a virtual environment
-  * `$ python3 -m venv venv_<project_name>` the `-m` stands for _import module_ `venv`
-  *    ! make sure you have the proper python version.
-  * For more info, check [venv](https://docs.python.org/3/library/venv.html)
+1. Create a virtual environment
+- `$ python3 -m venv venv_<project_name>` the `-m` stands for _import module_ `venv` \
+   ! make sure you have the proper python version. \
+For more info, check [venv](https://docs.python.org/3/library/venv.html)
 3. Activate the environment
-  * mac: `$ . venv_<project_name>/bin/activate` or `$ source venv_<project_name>/bin/activate`
-  * Windows: `$ source venv_project_name\Scripts\activate.bat`
-If the virtual environment is active, you recognise it by th (prefix) in the command line:
-  * `(venv_<project_name>) $ `
+- mac: `$ . venv_<project_name>/bin/activate` or `$ source venv_<project_name>/bin/activate`
+- Windows: `$ source venv_project_name\Scripts\activate.bat` \
+
+If the virtual environment is active, you recognise it by th (prefix) in the command line: \
+`(venv_<project_name>) $ `
 4. Check which packages are present in the current virtual environment
-  * `$ pip freeze`
+- `$ pip freeze`
 5. Install some packages
-  * `pip install pandas`
-  *    ! only install packages _inside_ of your virtual environment.
-6. Export the packages to a file <- this will make the life of your colleagues and future you easier, why?
-  * `pip freeze >> requirements.txt`
-7. Check the requirements-file, what is in there? Have you installed all that?
+- `pip install pandas` \
+   ! only install packages _inside_ of your virtual environment.
+6. Export the packages to a file 
+- `pip freeze >> requirements.txt`
+   - this will make the life of your colleagues and future you easier, why? see 11.
+7. Check the requirements-file, what is in there? Have you installed all that? Those are 'dependencies', 
+some packages need other packages to run. Those are installed as well.
+
 8. `$ deactivate` will exit the virtual environment
 
-
+Optional:
+9. Create a new environment called venv_requirements_test
+10. activate it
+11. Try: `pip install -r requirements.txt`
 
 
 ### PyCharm
@@ -253,34 +287,14 @@ If the virtual environment is active, you recognise it by th (prefix) in the com
 - Check the git branch: dev
 
 2b. [Python project structure](https://realpython.com/python-application-layouts/)
-                                               
-                                               
+                                                
 3. Set the configuration:
 - [Configurations] > Edit configuration
 - `+ ` to add, choose 'Python'
-  * Name: 'main' # or <project_name>
-  * Script path: /workspace/<project_folder>/main.py
-  * Parameters: input arguments can be proved here if the script requires that
-*   ! This is the 'PyCharm'-version of `python main.py flag=true`.
-- Make sure the Python Interpreter is referring to the location of the virtual environment
-- Make sure the Working directory refers for <project_folder>
--	Run the code
-
->>>>>> too much
-Optionally:
-4. Clone webapp from your repository to local
-
-Go to http://localhost:8000/my-first-webapp to see if all works 
-   
-5. Optional: (if the code doesn't run) 
-- create debug configuration (bug), similarly to the run-configuration.
-- read the error, google it, and solve it ;)
-
-Bonus exercise: 
-- change something in the content of the webpage :)
-
-For those who want to know more about Django, the webframework: [RealPython: getting started with Django](https://realpython.com/get-started-with-django-1/)
-   
->>>>>>> end 
-
-
+  - Name: 'main' # or <project_name>
+  - Script path: /workspace/<project_folder>/main.py
+  - Parameters: input arguments can be proved here if the script requires that, e.g. true \
+    ! This is the 'PyCharm'-version of `python main.py flag=true`.
+  - Make sure the Python Interpreter is referring to the location of the virtual environment
+  - Make sure the Working directory refers for <project_folder>
+  - Run the code
