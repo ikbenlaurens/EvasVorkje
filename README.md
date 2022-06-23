@@ -89,7 +89,7 @@ If you accidentally made a type or created a folder in another location:
 
 6. Add the files git 
 - `git status`  # check which files are tracked, if is it the files that you expect, continue
-- `git add *` # add all untracked files to the commit
+- `git add .` # add all untracked files to the commit
 
 note: normally I advice against using `*` for `all`, since you can accidentally check in unwanted material.
 Normally it's better to type the files/ folders and only add the ones you actually need:
